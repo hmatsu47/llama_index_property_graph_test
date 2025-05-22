@@ -730,8 +730,8 @@ wheels = [
 
 [[package]]
 name = "llama-index-graph-stores-postgres"
-version = "0.1.5"
-source = { git = "https://github.com/hmatsu47/llama-index-graph-stores-postgres.git#7a61d1815db8f74f1d89bff0525b324d84a64cea" }
+version = "0.1.6"
+source = { git = "https://github.com/hmatsu47/llama-index-graph-stores-postgres.git#dff550c694a180372aac05706b17e96cf2d863d7" }
 dependencies = [
     { name = "llama-index-core" },
     { name = "pgvector" },
