@@ -1,0 +1,16 @@
+[project]
+name = "llama-index-property-graph-test"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "llama-index>=0.12.37",
+    "llama-index-core>=0.12.37",
+    "llama-index-embeddings-bedrock>=0.5.0",
+    "llama-index-graph-stores-postgres",
+    "llama-index-llms-bedrock-converse>=0.5.6",
+]
+
+[tool.uv.sources]
+llama-index-graph-stores-postgres = { git = "https://github.com/hmatsu47/llama-index-graph-stores-postgres.git" }
