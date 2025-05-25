@@ -8,9 +8,6 @@ import nest_asyncio
 nest_asyncio.apply()
 
 async def main():
-    documents = SimpleDirectoryReader(
-        "~/llama_index_property_graph_test/data/"
-    ).load_data()
 
     graph_store = PostgresPropertyGraphStore(
         db_connection_string="postgresql://postgres:postgres@localhost:5432/postgres",
@@ -30,9 +27,9 @@ async def main():
     Settings.llm = llm
     Settings.embed_model = embed_model
 
-    index = PropertyGraphIndex.from_documents(
-        documents,
+    index = PropertyGraphIndex.from_existing(
         embed_model=embed_model,
+        llm=llm,
         kg_extractors=[
             SimpleLLMPathExtractor(llm=llm),
             ImplicitPathExtractor(),
