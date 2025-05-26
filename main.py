@@ -41,6 +41,8 @@ async def main():
         show_progress=True,
     )
 
+    index.property_graph_store.save_networkx_graph(name="./kg.html")
+
     query_engine = index.as_query_engine(include_text=True)
     response = query_engine.query("InterleafとViawebでは何が起きましたか？")
     print(response)

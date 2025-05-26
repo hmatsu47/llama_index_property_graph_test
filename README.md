@@ -9,12 +9,6 @@ docker pull pgvector/pgvector:pg17
 docker run -d -p 5432:5432 -e POSTGRES_PASSWORD='postgres' pgvector/pgvector:pg17
 ```
 
-## CREATE EXTENSION
-
-```sql:
-CREATE EXTENSION IF NOT EXISTS vector;
-```
-
 ## Indexing
 
 ```sh:
