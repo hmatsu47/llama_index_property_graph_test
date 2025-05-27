@@ -1,6 +1,7 @@
 # llama_index_property_graph_test
 
-[llama-index-graph-stores-postgres](https://github.com/hmatsu47/llama-index-graph-stores-postgres) を使ってグラフ RAG を試す
+- [llama-index-graph-stores-postgres](https://github.com/hmatsu47/llama-index-graph-stores-postgres) を使ってグラフ RAG を試す
+  - Amazon Bedrock の Anthropic Claude 3.7 Sonnet と Amazon Titan Text Embeddings V2 を使用（オレゴンリージョン）
 
 ## PostgreSQL 17 with pgvector 0.8.0 or higher
 
