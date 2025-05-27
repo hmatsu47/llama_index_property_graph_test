@@ -1,11 +1,18 @@
 import asyncio
+from dotenv import load_dotenv
+from langfuse.llama_index import LlamaIndexCallbackHandler
 from llama_index.core import PropertyGraphIndex, Settings, SimpleDirectoryReader
-from llama_index.embeddings.bedrock import BedrockEmbedding, Models
-from llama_index.llms.bedrock_converse import BedrockConverse
+from llama_index.core.callbacks import CallbackManager
 from llama_index.core.indices.property_graph import ImplicitPathExtractor, SimpleLLMPathExtractor
+from llama_index.embeddings.bedrock import BedrockEmbedding, Models
 from llama_index.graph_stores.postgres import PostgresPropertyGraphStore
+from llama_index.llms.bedrock_converse import BedrockConverse
 import nest_asyncio
+import os
+
 nest_asyncio.apply()
+
+load_dotenv()
 
 async def main():
     documents = SimpleDirectoryReader(
@@ -16,6 +23,13 @@ async def main():
         db_connection_string="postgresql://postgres:postgres@localhost:5432/postgres",
     )
     # DB・ユーザー・パスワードはテスト用
+
+    langfuse_callback_handler = LlamaIndexCallbackHandler(
+        public_key = os.getenv("LANGFUSE_P_KEY"),
+        secret_key = os.getenv("LANGFUSE_S_KEY"),
+        host="http://localhost:3000",
+    )
+    Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
     llm=BedrockConverse(
         model="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
