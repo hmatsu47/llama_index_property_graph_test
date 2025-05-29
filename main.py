@@ -4,7 +4,7 @@ from langfuse.llama_index import LlamaIndexCallbackHandler
 from llama_index.core import PropertyGraphIndex, Settings, SimpleDirectoryReader
 from llama_index.core.callbacks import CallbackManager
 from llama_index.core.indices.property_graph import ImplicitPathExtractor, SimpleLLMPathExtractor
-from llama_index.embeddings.bedrock import BedrockEmbedding, Models
+from llama_index.embeddings.bedrock import BedrockEmbedding
 from llama_index.graph_stores.postgres import PostgresPropertyGraphStore
 from llama_index.llms.bedrock_converse import BedrockConverse
 import nest_asyncio
@@ -20,25 +20,24 @@ async def main():
     ).load_data()
 
     graph_store = PostgresPropertyGraphStore(
-        db_connection_string="postgresql://postgres:postgres@localhost:5432/postgres",
+        db_connection_string=os.getenv("DB_CONNECTION_URL"),
     )
-    # DB・ユーザー・パスワードはテスト用
 
     langfuse_callback_handler = LlamaIndexCallbackHandler(
-        public_key = os.getenv("LANGFUSE_P_KEY"),
-        secret_key = os.getenv("LANGFUSE_S_KEY"),
+        public_key=os.getenv("LANGFUSE_P_KEY"),
+        secret_key=os.getenv("LANGFUSE_S_KEY"),
         host="http://localhost:3000",
     )
     Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
     llm=BedrockConverse(
-        model="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
-        region_name="us-west-2",
-        temperature=0.0
+        model=os.getenv("LLM_MODEL"),
+        region_name=os.getenv("REGION_NAME"),
+        temperature=0.0,
     )
     embed_model=BedrockEmbedding(
-        model_name=Models.TITAN_EMBEDDING_V2_0,
-        region_name="us-west-2"
+        model_name=os.getenv("EMBED_MODEL"),
+        region_name=os.getenv("REGION_NAME"),
     )
 
     Settings.llm = llm

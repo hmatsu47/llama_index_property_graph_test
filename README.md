@@ -44,6 +44,15 @@ touch .env
 vi .env
 ```
 
+- DB 接続と使用モデル（LLM）・リージョン指定を記述
+
+```text:
+DB_CONNECTION_URL="postgresql://postgres:postgres@localhost:5432/postgres"
+LLM_MODEL="us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+EMBED_MODEL="amazon.titan-embed-text-v2:0"
+REGION_NAME="us-west-2"
+```
+
 - 公開鍵・秘密鍵を設定して保存
 
 ```text:
