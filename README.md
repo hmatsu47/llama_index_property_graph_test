@@ -53,7 +53,7 @@ EMBED_MODEL="amazon.titan-embed-text-v2:0"
 REGION_NAME="us-west-2"
 ```
 
-- 公開鍵・秘密鍵を設定して保存
+- 公開鍵・秘密鍵の指定を追記して保存
 
 ```text:
 LANGFUSE_P_KEY="pk-lf-XXXXXXXX"
@@ -84,7 +84,7 @@ Interleafはムーアの法則によって影響を受けた企業でした。�
 ## Querying from existing index
 
 ```sh:
-python from-existing.py
+python from_existing.py
 ```
 
 ### 結果
@@ -96,3 +96,11 @@ Interleafは頭の良い人材と優れた技術を持っていた企業でし�
 
 一方、Viawebはロバート・モリスと共同で開発されたウェブベースのオンラインストア作成ツールで、当初は「Webgen」と呼ばれていました。これはユーザーが自分のウェブブラウザ上でストアを構築できる初のソフトウェアでした。ViawebのサーバーサイドコードはすべてLispで書かれており、ユーザーがページのスタイルを自分で定義できるコードエディタも備えていました。Viawebは1998年にYahoo!に買収され、開発者たちは大きな利益を得ることになりました。
 ```
+
+## Streamlit によるシンプルなチャット
+
+```sh:
+streamlit run simple_chat.py --server.port 80
+```
+
+![チャット画面](./screen_shot.png)
