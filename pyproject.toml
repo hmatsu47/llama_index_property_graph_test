@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "langfuse>=2.60.7",
     "llama-index>=0.12.37",
     "llama-index-core>=0.12.37",
     "llama-index-embeddings-bedrock>=0.5.0",

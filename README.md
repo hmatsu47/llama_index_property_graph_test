@@ -63,7 +63,7 @@ LANGFUSE_S_KEY="sk-lf-XXXXXXXX"
 ## Indexing
 
 ```sh:
-python main.py
+python indexing.py
 ```
 
 ### 結果
@@ -100,7 +100,7 @@ Interleafは頭の良い人材と優れた技術を持っていた企業でし�
 ## Streamlit によるシンプルなチャット
 
 ```sh:
-streamlit run simple_chat.py --server.port 80
+streamlit run simple_chat.py --server.port 8080
 ```
 
 ![チャット画面](./screen_shot.png)
