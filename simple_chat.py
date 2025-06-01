@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
-from langfuse.llama_index import LlamaIndexCallbackHandler
+from langfuse.llama_index import LlamaIndexInstrumentor
 from llama_index.core import PropertyGraphIndex, Settings
-from llama_index.core.callbacks import CallbackManager
+# from llama_index.core.callbacks import CallbackManager
 from llama_index.core.indices.property_graph import ImplicitPathExtractor, SimpleLLMPathExtractor
 from llama_index.embeddings.bedrock import BedrockEmbedding
 from llama_index.graph_stores.postgres import PostgresPropertyGraphStore
@@ -13,18 +13,21 @@ import time
 
 load_dotenv()
 
+instrumentor = LlamaIndexInstrumentor()
+instrumentor.start()
+
 def load_index():
 
     graph_store = PostgresPropertyGraphStore(
         db_connection_string=os.getenv("DB_CONNECTION_URL"),
     )
 
-    langfuse_callback_handler = LlamaIndexCallbackHandler(
-        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
-        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
-        host=os.getenv("LANGFUSE_HOST"),
-    )
-    Settings.callback_manager = CallbackManager([langfuse_callback_handler])
+    # langfuse_callback_handler = LlamaIndexCallbackHandler(
+    #     public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+    #     secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+    #     host=os.getenv("LANGFUSE_HOST"),
+    # )
+    # Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
     llm=BedrockConverse(
         model=os.getenv("LLM_MODEL"),
@@ -87,3 +90,5 @@ if prompt := st.chat_input():
     response = st.session_state.query_engine.query(prompt)
     st.session_state.messages.append({"role": "assistant", "content": convert_empty(f"{response}")})
     st.chat_message("assistant").write_stream(stream_data(convert_empty(f"{response}")))
+
+    instrumentor.flush()
