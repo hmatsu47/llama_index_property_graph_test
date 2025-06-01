@@ -56,8 +56,9 @@ REGION_NAME="us-west-2"
 - 公開鍵・秘密鍵の指定を追記して保存
 
 ```text:
-LANGFUSE_P_KEY="pk-lf-XXXXXXXX"
-LANGFUSE_S_KEY="sk-lf-XXXXXXXX"
+LANGFUSE_PUBLIC_KEY="pk-lf-XXXXXXXX"
+LANGFUSE_SECRET_KEY="sk-lf-XXXXXXXX"
+LANGFUSE_HOST="http://localhost:3000"
 ```
 
 ## Indexing

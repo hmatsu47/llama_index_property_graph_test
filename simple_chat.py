@@ -20,9 +20,9 @@ def load_index():
     )
 
     langfuse_callback_handler = LlamaIndexCallbackHandler(
-        public_key = os.getenv("LANGFUSE_P_KEY"),
-        secret_key = os.getenv("LANGFUSE_S_KEY"),
-        host="http://localhost:3000",
+        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+        host=os.getenv("LANGFUSE_HOST"),
     )
     Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
