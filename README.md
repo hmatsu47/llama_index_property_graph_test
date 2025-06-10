@@ -80,7 +80,7 @@ Interleafはムーアの法則によって影響を受けた企業でした。�
 一方、Viawebはウェブベースのオンラインストア作成ツールとして開発されました。当初は「Webgen」という名前でしたが、後にViawebに改名されました。このソフトウェアはユーザーが自分のウェブブラウザ上でストアを構築できる初のツールでした。サーバーサイドコードはすべてLispで書かれており、製品は成功して顧客も増えていきました。最終的に1998年にYahoo!に買収され、創業者たちは大きな利益を得ることになりました。
 ```
 
-- 実際には`LlamaIndexInstrumentor`を使うとレスポンスに含まれる`usage`のフォーマットが Langfuse 形式・OpenAI 形式のいずれとも合わないため`langfuse/utils/__init__.py`の`_convert_usage_input`で`ValueError`が発生する（実行には支障なし）
+- 実際には`LlamaIndexInstrumentor`を使うとレスポンスに含まれる`usage`のフォーマットが Langfuse 形式・OpenAI 形式のいずれとも合わないもの（`{}`）が含まれるため`langfuse/utils/__init__.py`の`_convert_usage_input`で`ValueError`が発生する（実行には支障なし）
   - `ValueError: Usage object must have either {input, output, total, unit} or {promptTokens, completionTokens, totalTokens}`
   - 以降の実行時の結果も同様
 - [グラフの状態（kg.html）はこちら](./kg.html)
