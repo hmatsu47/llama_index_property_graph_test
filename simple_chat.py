@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 from langfuse.llama_index import LlamaIndexInstrumentor
 from llama_index.core import PropertyGraphIndex, Settings
-# from llama_index.core.callbacks import CallbackManager
 from llama_index.core.indices.property_graph import ImplicitPathExtractor, SimpleLLMPathExtractor
 from llama_index.embeddings.bedrock import BedrockEmbedding
 from llama_index.graph_stores.postgres import PostgresPropertyGraphStore
@@ -10,6 +9,7 @@ from typing import Generator
 import os
 import streamlit as st
 import time
+from langfuse_patch import create_bedrock_langfuse_callback_manager
 
 load_dotenv()
 
@@ -22,12 +22,12 @@ def load_index():
         db_connection_string=os.getenv("DB_CONNECTION_URL"),
     )
 
-    # langfuse_callback_handler = LlamaIndexCallbackHandler(
-    #     public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
-    #     secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
-    #     host=os.getenv("LANGFUSE_HOST"),
-    # )
-    # Settings.callback_manager = CallbackManager([langfuse_callback_handler])
+    # Create and set the Bedrock-compatible Langfuse callback manager
+    Settings.callback_manager = create_bedrock_langfuse_callback_manager(
+        public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),
+        secret_key=os.getenv("LANGFUSE_SECRET_KEY"),
+        host=os.getenv("LANGFUSE_HOST"),
+    )
 
     llm=BedrockConverse(
         model=os.getenv("LLM_MODEL"),
